@@ -1,0 +1,413 @@
+<!-- templates/proposta_plano_de_voo.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de voo: a conquista digital do Planeta Imaginário</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&display=swap');
+
+        :root {
+            --space-dark: #0a192f;
+            --space-light: #1e3a5f;
+            --accent-blue: #64ffda;
+            --text-light: #ccd6f6;
+            --text-dark: #8892b0;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--space-dark);
+            color: var(--text-light);
+            margin: 0;
+            /* Adiciona padding no final para o conteúdo não ficar escondido atrás do rodapé */
+            padding: 0 0 100px 0;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Cabeçalho da Missão */
+        .mission-briefing {
+            background: linear-gradient(145deg, var(--space-light), var(--space-dark));
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 20px;
+            margin-bottom: 50px;
+            border: 1px solid var(--space-light);
+        }
+
+        .mission-briefing h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: white;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px var(--accent-blue);
+        }
+
+        .mission-briefing p {
+            font-size: 1.5em;
+            color: var(--accent-blue);
+            margin-top: 10px;
+        }
+        
+        .mission-for {
+            font-size: 1.2em;
+            color: var(--text-dark);
+        }
+
+        /* Seções */
+        .mission-section {
+            padding: 50px 0;
+            border-bottom: 1px solid var(--space-light);
+        }
+        .mission-section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h2 .icon {
+            display: block;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Fases da Missão */
+        .phases-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .phase {
+            background-color: var(--space-light);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #2a4c7a;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .phase:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .phase h3 {
+            font-size: 1.8em;
+            color: var(--accent-blue);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .phase ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .phase ul li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .phase ul li::before {
+            content: '✓';
+            color: var(--accent-blue);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        /* Investimento */
+        .investment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .investment-card {
+            background-color: var(--space-light);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #2a4c7a;
+        }
+        
+        .investment-card h3 {
+            color: var(--accent-blue);
+            font-size: 1.5em;
+            margin-top: 0;
+        }
+        
+        .price {
+            font-size: 2.5em;
+            font-weight: 900;
+            color: white;
+            margin: 10px 0;
+        }
+        
+        .price span {
+            font-size: 0.5em;
+            font-weight: 400;
+            color: var(--text-dark);
+        }
+        
+        .investment-card p {
+            color: var(--text-dark);
+            flex-grow: 1;
+        }
+
+        .recommended {
+            border: 2px solid var(--accent-blue);
+            box-shadow: 0 0 20px var(--accent-blue);
+            transform: scale(1.05);
+        }
+        
+        .recommended .badge {
+            display: inline-block;
+            background-color: var(--accent-blue);
+            color: var(--space-dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Cronograma */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: var(--space-light);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '🚀';
+            position: absolute;
+            right: -17px;
+            top: 15px;
+            font-size: 1.8em;
+            z-index: 1;
+        }
+        
+        .timeline-left { left: 0; }
+        .timeline-right { left: 50%; }
+        
+        .timeline-right::after { left: -17px; }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--space-light);
+            border-radius: 8px;
+        }
+        .timeline-content h4 { color: var(--accent-blue); margin:0 0 10px 0; }
+        .timeline-content p { color: var(--text-dark); margin: 0; }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+        }
+        .cta-button {
+            background-color: var(--accent-blue);
+            color: var(--space-dark);
+            font-size: 1.3em;
+            font-weight: 700;
+            padding: 20px 45px;
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+        }
+        .cta-button:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.3);
+        }
+
+        /* NOVO: Rodapé de Exemplos */
+        .lp-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+        .lp-footer-text {
+            color: var(--text-light);
+            margin: 0;
+            font-weight: bold;
+        }
+        .lp-button {
+            background-color: transparent;
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .lp-button:hover {
+            background-color: var(--accent-blue);
+            color: var(--space-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .phases-grid { grid-template-columns: 1fr; }
+            .timeline::before { left: 15px; }
+            .timeline-item { width: 100%; padding-left: 50px; padding-right: 0; }
+            .timeline-left::after, .timeline-right::after { left: -2px; }
+            .timeline-right { left: 0%; }
+            .lp-footer {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+            body { padding-bottom: 150px; } /* Aumenta o padding para o rodapé maior */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="mission-briefing">
+            <h1>Plano de voo</h1>
+            <p>A conquista digital do Planeta Imaginário</p>
+            <span class="mission-for">Para: comandante Eduardo e sócio | De: piloto André, SacadaWeb | Data: 27/08/2025</span>
+        </header>
+        <main>
+            <section class="mission-section">
+                <h2><span class="icon">🌌</span>Proposta estratégica</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; font-size: 1.2em; color: var(--text-dark);">A procura de uma festa pela família começa online. Nossa missão é construir uma <strong>nave de última geração</strong> que levará as famílias a se encantarem pelo seu negócio.</p><div class="phases-grid">
+                    <div class="phase">
+                        <h3>Fase 1: Construção da </br>Nave-Mãe (o site)</h3>
+                        <ul>
+                            <li><strong>Design futurista:</strong> um visual moderno e totalmente responsivo, que funcione perfeitamente em qualquer dispositivo.</li>
+                            <li><strong>Módulos de pouso (Landing Pages):</strong> páginas de alta conversão, projetadas especificamente para festas e passaportes, prontas para receber tráfego de campanhas.</li>
+                            <li><strong>Sistema de navegação (SEO):</strong> otimização para que os sistemas de busca do Google encontrem o Planeta Imaginário quando pais procurarem por diversão em Jundiaí e Campinas.</li>
+                        </ul>
+                    </div>
+                    <div class="phase">
+                        <h3>Fase 2: Torre de controle (Chatwoot & IA)</h3>
+                        <ul>
+                            <li><strong>Painel de comando unificado:</strong> o CRM Chatwoot centraliza todas as comunicações (site, e-mail, redes sociais) em uma única tela.</li>
+                            <li><strong>Comunicação 24/7:</strong> o chatbot com IA atende e qualifica clientes a qualquer hora do dia, garantindo que nenhuma oportunidade seja perdida.</li>
+                            <li><strong>Protocolos de resposta rápida:</strong> respostas instantâneas para as dúvidas mais comuns, liberando sua equipe para focar em negociações estratégicas.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section class="mission-section">
+                <h2><span class="icon">💰</span>Mapa de investimento</h2>
+                <div class="investment-grid">
+                    <div class="investment-card">
+                        <h3>Fase 1: Nave-Mãe</h3>
+                        <div class="price">R$ 3.000</div>
+                        <p>Revitalização completa do site, criação de até 3 landing pages de alta conversão e otimização SEO básica.</p>
+                    </div>
+                    <div class="investment-card recommended">
+                        <span class="badge">Missão Completa</span>
+                        <h3>Pacote de Conquista</h3>
+                        <div class="price">R$ 5.000 <span>(Setup)</span></div>
+                        <p>A solução ponta a ponta. Integração total da Nave-Mãe (Site) com a Torre de Controle (Chatwoot & IA).<br><strong>Economia de R$ 1.000!</strong></p>
+                    </div>
+                    <div class="investment-card">
+                        <h3>Fase 2: Torre de Controle</h3>
+                        <div class="price">R$ 3.000</div>
+                        <p>Setup, configuração e treinamento inicial do CRM Chatwoot e do Chatbot com Inteligência Artificial.</p>
+                    </div>
+                </div>
+                 <div class="investment-grid" style="margin-top: 25px;">
+                    <div class="investment-card" style="grid-column: 1 / -1;">
+                        <h3>Plano mensal de operação</h3>
+                        <div class="price">R$ 350<span>/mês</span></div>
+                        <p>Inclui hospedagem, suporte técnico, atualizações e uma franquia de até 2.000 interações/mês de clientes usando a IA. <br><small>Uso excedente: R$ 10,00 a cada 100 interações adicionais.</small></p>
+                    </div>
+                </div>
+            </section>
+            <section class="mission-section">
+                <h2><span class="icon">🗓️</span>Cronograma de Lançamento</h2>
+                <div class="timeline">
+                    <div class="timeline-item timeline-left">
+                       <div class="timeline-content">
+                           <h4>Semanas 1-4</h4>
+                           <p>Construção da Nave-Mãe: Briefing, design, desenvolvimento e aprovação do novo site.</p>
+                       </div>
+                    </div>
+                    <div class="timeline-item timeline-right">
+                       <div class="timeline-content">
+                           <h4>Semanas 3-5</h4>
+                           <p>Montagem da Torre de Controle: Setup do Chatwoot e treinamento intensivo do nosso assistente IA.</p>
+                       </div>
+                    </div>
+                    <div class="timeline-item timeline-left">
+                       <div class="timeline-content">
+                           <h4>Semana 6</h4>
+                           <p>Integração e Testes: Acoplagem de todos os sistemas e simulações de voo para garantir performance máxima.</p>
+                       </div>
+                    </div>
+                     <div class="timeline-item timeline-right">
+                       <div class="timeline-content">
+                           <h4>Semana 7</h4>
+                           <p>Decolagem! Lançamento oficial da plataforma e acompanhamento de rota para otimizações.</p>
+                       </div>
+                    </div>
+                </div>
+            </section>
+            <section class="cta-section mission-section">
+                <h2><span class="icon">🚀</span>Iniciando a Contagem Regressiva</h2>
+                <p style="text-align: center; max-width: 700px; margin: 0 auto 30px; font-size: 1.2em; color: var(--text-dark);">Eduardo, estamos prontos para iniciar esta missão e levar o Planeta Imaginário a novas galáxias de sucesso. Vamos decolar juntos?</p>
+                <a href="https://api.whatsapp.com/send?phone=5516991122235&text=Ol%C3%A1%2C%20Andr%C3%A9!%20Estou%20pronto%20para%20iniciar%20a%20miss%C3%A3o.%20Aceito%20a%20proposta%20para%20o%20Planeta%20Imagin%C3%A1rio." target="_blank" class="cta-button">Aprovar Missão</a>
+            </section>
+        </main>
+    </div>
+
+    
+
+</body>
+</html>
